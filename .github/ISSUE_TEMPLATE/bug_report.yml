@@ -1,0 +1,41 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with the plugin.
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please ensure you are using the latest version of the plugin before submitting.
+  - type: input
+    id: plugin_version
+    attributes:
+      label: Plugin Version
+      placeholder: "e.g., 1.4.2-RELEASE"
+    validations:
+      required: true
+  - type: dropdown
+    id: server_software
+    attributes:
+      label: Server Software & Version
+      options:
+        - Paper
+        - Purpur
+        - Spigot
+        - Velocity / Waterfall
+        - Folia
+        - Other (Specify in description)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      placeholder: Clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs / Stacktrace
+      placeholder: Paste your console errors or link a pastebin/mclo.gs here.
+      render: java
