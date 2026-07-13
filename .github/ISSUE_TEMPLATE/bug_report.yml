@@ -1,80 +1,162 @@
 name: Bug Report
-description: Report a bug, calculation discrepancy, or stability issue with Exchequer.
-labels: ["bug", "triage"]
+description: Report something broken in Exchequer
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Please verify that you are running the latest production build of Exchequer and its dependencies before submitting this report.
+        Thanks for taking the time to report a bug. Please only use this
+        form for actual bugs — for setup help or general questions, use
+        the Wiki or the resource page's comment/ticket system instead.
+        Fill this out as completely as you can; missing info (especially
+        Towny/Vault status and console errors) is the #1 reason bug
+        reports take longer to fix.
+
   - type: input
-    id: plugin_version
+    id: plugin-version
     attributes:
       label: Exchequer Version
-      placeholder: "e.g., 1.0.4-RELEASE"
+      description: Found in /plugins or the plugin.yml, e.g. 1.2.0
+      placeholder: "1.2.0"
     validations:
       required: true
+
   - type: dropdown
-    id: server_software
+    id: server-software
     attributes:
-      label: Server Platform
-      description: Exchequer utilizes modern API features and natively targets the Paper ecosystem.
+      label: Server Software
       options:
         - Paper
         - Purpur
         - Folia
-        - Other (Specify in environment details)
+        - Other / Not sure
     validations:
       required: true
+
   - type: input
-    id: server_version
+    id: mc-version
     attributes:
-      label: Minecraft / Software Version
-      placeholder: "e.g., Paper 1.21.1-R0.1-SNAPSHOT"
+      label: Minecraft Version
+      placeholder: "1.21.1"
     validations:
       required: true
+
   - type: dropdown
-    id: subsystem
+    id: towny-installed
     attributes:
-      label: Affected Subsystem
-      description: Select the core economy module experiencing the issue.
+      label: Is Towny installed?
+      description: Exchequer behaves differently with vs without Towny —
+        this matters a lot for diagnosing treasury/GDP/governance bugs.
       options:
-        - Banking & Accrued Interest
-        - Fiscal Policy (Taxation / Sovereign Accounts)
-        - Dynamic Market Operations
-        - Macroeconomic Simulation (Inflation / Deflation)
-        - API Bridge (Vault / Custom Eco Integration)
-        - Core Database & Persistence (MySQL / SQLite)
+        - "Yes"
+        - "No"
+        - Not sure
     validations:
       required: true
-  - type: textarea
-    id: description
+
+  - type: input
+    id: towny-version
     attributes:
-      label: Problem Description
-      placeholder: Provide a clear, detailed explanation of the behavior. If applicable, specify the expected mathematical outcome versus the actual outcome.
+      label: Towny Version (if installed)
+      description: Leave blank if Towny isn't installed
+      placeholder: "0.102.0.0"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: vault-installed
+    attributes:
+      label: Is Vault installed?
+      description: Affects the Economy API bridge and whether MONEY is
+        tradeable as a currency.
+      options:
+        - "Yes"
+        - "No"
+        - Not sure
     validations:
       required: true
+
+  - type: dropdown
+    id: bug-area
+    attributes:
+      label: Which part of the plugin is affected?
+      description: Pick the closest match — helps route this to the right
+        part of the codebase faster.
+      multiple: true
+      options:
+        - Bank GUI (deposit/withdraw)
+        - Exchange GUI / /exchange command
+        - Market GUI / price & history commands
+        - GDP / Dutch Disease / industry specialization
+        - Trade routes
+        - Town shares
+        - War/raid insurance
+        - Economic events
+        - Towny integration (treasury, governance, taxation)
+        - Vault / MONEY currency
+        - Cross-server sync
+        - PlaceholderAPI placeholders
+        - Something else / not sure
+    validations:
+      required: true
+
   - type: textarea
-    id: reproduction_steps
+    id: reproduction-steps
     attributes:
       label: Steps to Reproduce
+      description: Exact steps, in order. Include command syntax if
+        relevant, e.g. `/exchange iron gold 500`.
       placeholder: |
-        1. Establish account balance at...
-        2. Initiate fiscal cycle via...
-        3. Observe calculation discrepancy under conditions...
+        1. Open the Exchange GUI via /exchequer exchange
+        2. Select iron as "from" and gold as "to"
+        3. Enter an amount greater than my current balance
+        4. Click confirm
     validations:
-      required: false
+      required: true
+
   - type: textarea
-    id: environment_details
+    id: expected-behavior
     attributes:
-      label: Environment & Configuration Details
-      placeholder: List relevant plugins (e.g., EssentialsX, PlaceholderAPI), database engines, or config modifications that could influence this behavior.
+      label: Expected Behavior
     validations:
-      required: false
+      required: true
+
   - type: textarea
-    id: logs
+    id: actual-behavior
     attributes:
-      label: Console Logs / Stack Traces
-      description: Paste relevant exception stack traces, thread dumps, or debug logs from /plugins/Exchequer/logs/.
-      render: java
+      label: Actual Behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: console-log
+    attributes:
+      label: Console Error / Stack Trace
+      description: Paste any relevant console output. This gets
+        auto-formatted as code, no need to add backticks yourself.
+      render: shell
     validations:
       required: false
+
+  - type: textarea
+    id: config-snippet
+    attributes:
+      label: Relevant config.yml Section
+      description: If the bug involves tax rates, material settings, or
+        anything else config-driven, paste the relevant section here.
+      render: yaml
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've checked the Wiki and this isn't a known/documented behavior
+          required: true
+        - label: I'm running the latest version of Exchequer
+          required: true
+        - label: I've included console errors if any appeared
+          required: false
