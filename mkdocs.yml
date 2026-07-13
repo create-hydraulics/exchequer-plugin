@@ -1,1 +1,19 @@
 
+site_name: Exchequer Documentation
+site_description: Technical manual and configuration specifications for the Exchequer simulation engine.
+site_url: https://yourusername.github.io/your-repository-name/
+
+theme:
+  name: material
+  palette:
+    scheme: slate      # Default dark mode
+    primary: blue grey # Clean, industrial primary accent
+    accent: light blue
+  features:
+    - navigation.tabs  # Top navigation bar layout
+    - search.suggest   # Auto-complete search bar queries
+
+nav:
+  - Deployment Overview: index.md
+  - System Configuration: configuration.md
+  - Core Economic Modules: modules.md
