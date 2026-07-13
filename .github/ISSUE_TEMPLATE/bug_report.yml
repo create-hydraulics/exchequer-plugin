@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to report a bug. Please only use this
-        form for actual bugs — for setup help or general questions, use
+        form for actual bugs, for setup help or general questions, use
         the Wiki or the resource page's comment/ticket system instead.
         Fill this out as completely as you can; missing info (especially
         Towny/Vault status and console errors) is the #1 reason bug
@@ -46,7 +46,7 @@ body:
     id: towny-installed
     attributes:
       label: Is Towny installed?
-      description: Exchequer behaves differently with vs without Towny —
+      description: Exchequer behaves differently with vs without Towny,
         this matters a lot for diagnosing treasury/GDP/governance bugs.
       options:
         - "Yes"
@@ -81,7 +81,7 @@ body:
     id: bug-area
     attributes:
       label: Which part of the plugin is affected?
-      description: Pick the closest match — helps route this to the right
+      description: Pick the closest match, helps route this to the right
         part of the codebase faster.
       multiple: true
       options:
