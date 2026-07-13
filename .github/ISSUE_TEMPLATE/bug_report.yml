@@ -1,41 +1,80 @@
-name: 🐛 Bug Report
-description: Report a bug or issue with the plugin.
+name: Bug Report
+description: Report a bug, calculation discrepancy, or stability issue with Exchequer.
 labels: ["bug", "triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report! Please ensure you are using the latest version of the plugin before submitting.
+        Please verify that you are running the latest production build of Exchequer and its dependencies before submitting this report.
   - type: input
     id: plugin_version
     attributes:
-      label: Plugin Version
-      placeholder: "e.g., 1.4.2-RELEASE"
+      label: Exchequer Version
+      placeholder: "e.g., 1.0.4-RELEASE"
     validations:
       required: true
   - type: dropdown
     id: server_software
     attributes:
-      label: Server Software & Version
+      label: Server Platform
+      description: Exchequer utilizes modern API features and natively targets the Paper ecosystem.
       options:
         - Paper
         - Purpur
-        - Spigot
-        - Velocity / Waterfall
         - Folia
-        - Other (Specify in description)
+        - Other (Specify in environment details)
+    validations:
+      required: true
+  - type: input
+    id: server_version
+    attributes:
+      label: Minecraft / Software Version
+      placeholder: "e.g., Paper 1.21.1-R0.1-SNAPSHOT"
+    validations:
+      required: true
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Affected Subsystem
+      description: Select the core economy module experiencing the issue.
+      options:
+        - Banking & Accrued Interest
+        - Fiscal Policy (Taxation / Sovereign Accounts)
+        - Dynamic Market Operations
+        - Macroeconomic Simulation (Inflation / Deflation)
+        - API Bridge (Vault / Custom Eco Integration)
+        - Core Database & Persistence (MySQL / SQLite)
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
-      label: Bug Description
-      placeholder: Clear and concise description of what the bug is.
+      label: Problem Description
+      placeholder: Provide a clear, detailed explanation of the behavior. If applicable, specify the expected mathematical outcome versus the actual outcome.
     validations:
       required: true
   - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Establish account balance at...
+        2. Initiate fiscal cycle via...
+        3. Observe calculation discrepancy under conditions...
+    validations:
+      required: true
+  - type: textarea
+    id: environment_details
+    attributes:
+      label: Environment & Configuration Details
+      placeholder: List relevant plugins (e.g., EssentialsX, PlaceholderAPI), database engines, or config modifications that could influence this behavior.
+    validations:
+      required: false
+  - type: textarea
     id: logs
     attributes:
-      label: Error Logs / Stacktrace
-      placeholder: Paste your console errors or link a pastebin/mclo.gs here.
+      label: Console Logs / Stack Traces
+      description: Paste relevant exception stack traces, thread dumps, or debug logs from /plugins/Exchequer/logs/.
       render: java
+    validations:
+      required: false
